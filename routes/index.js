@@ -10,7 +10,7 @@ const upload = require("./multer");
 const utils = require("../utils/utils");
 
 
-// GET
+// GET //home
 router.get("/", function (req, res) {
   res.render("index", { footer: false });
 });
