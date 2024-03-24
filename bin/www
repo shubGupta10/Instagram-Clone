@@ -4,6 +4,10 @@
  * Module dependencies.
  */
 
+require("dotenv").config();
+const mongoose = require("mongoose");
+
+
 var app = require('../app');
 var debug = require('debug')('insta:server');
 var http = require('http');
@@ -14,6 +18,12 @@ var http = require('http');
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
+
+
+//connect to mongodb atlas
+mongoose.connect(process.env.MONGOURL,  { useNewUrlParser: true, useUnifiedTopology: true })
+.then(()=> console.log("Connected to MongoDB"))
+.catch(err => console.error("Error connecting to MongoDB", err));
 
 /**
  * Create HTTP server.
