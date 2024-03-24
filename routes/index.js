@@ -5,6 +5,8 @@ const localStrategy = require("passport-local");
 const userModel = require("./users");
 const postModel = require("./posts");
 const storyModel = require("./story");
+
+
 passport.use(new localStrategy(userModel.authenticate()));
 const upload = require("./multer");
 const utils = require("../utils/utils");
@@ -220,13 +222,13 @@ router.post("/register", function (req, res) {
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/feed",
+    successRedirect: "/profile",
     failureRedirect: "/login",
   }),
   function (req, res) {}
 );
 
-router.get("/logout", function (req, res) {
+router.get("/logout", function (req, res, next) {
   req.logout(function (err) {
     if (err) {
       return next(err);
